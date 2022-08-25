@@ -1,0 +1,53 @@
+@use '../UI/_variables.sass' as *;
+@use '../UI/button.scss' as *;
+@use '../main/search/search.styles.scss';
+
+.nav {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    text-align: right;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+
+    .navbar-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: 50px;
+        z-index: 2;
+        background-color: $base-color;
+    }
+    span {
+        color: $highlight-color;
+        font-family: $font-primary;
+        cursor: pointer;
+    }
+
+    .nav-links {
+        font-size: 1.5rem;
+        padding: .5rem 1.2rem;
+    }
+}
+
+.navbar-border {
+    width: 100%;
+    height: 2px;
+    background-color: $highlight-color;
+    border-radius: 2px;
+}
+
+.navbar-border-center {
+    height: 90px;
+    border: 2px solid $highlight-color;
+    background-color: $base-color;
+    border-radius: 50%;
+    width: 170px;
+    // margin: 0 auto;
+    z-index: 1;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 35%;
+    left: 50%;
+}

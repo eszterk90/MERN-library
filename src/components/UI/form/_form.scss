@@ -1,0 +1,64 @@
+@use '../_variables.sass' as *;
+
+form {
+    height: 520px;
+    width: 400px;
+    background-color: rgba($dark-color, .13);
+    position: absolute;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba($dark-color, .1);
+    padding: 50px 35px;
+    
+    h3 {
+        text-align: center;
+    }
+    
+    label {
+        display: block;
+        margin: 1rem 0;
+        font-size: 1.1rem;
+    }
+    
+    input {
+        display: block;
+        height: 50px;
+        width: 100%;
+        background-color: rgba($dark-color, .15);
+        padding: 0 10px;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+    
+    * {
+        font-weight: 600;
+        border: none;
+        outline: none;
+        letter-spacing: 0.5px;
+        color: lighten($base-color, 90%);
+    }
+
+    .form-btn {
+        margin-top: 40px;
+        width: 100%;
+        background-color: $base-color;
+        color: $dark-color;
+        padding: 15px 0;
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: $border-radius-s;
+        cursor: pointer;
+    }
+}
+
+/* Change the white to any color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px rgba($dark-color, .9) inset !important;
+}
+
+/*Change text in autofill textbox*/
+input:-webkit-autofill{
+    -webkit-text-fill-color: $base-color !important;
+}

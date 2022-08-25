@@ -1,0 +1,34 @@
+@use './components/UI/_variables.sass' as *;
+@use './components//UI//form/form';
+@use './components/authentication/authentication.scss';
+@use './components/authentication/overlay/overlay.scss';
+@use './components/authentication/container.scss';
+@use './components/UI/button';
+@use './components//UI/form/message/message.styles.scss';
+@use './components/main/header/header.style.scss';
+
+
+*, *::after, *::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $base-color;
+
+  h1, h2, h3, label {
+    font-family: $font-primary;
+  }
+
+  p, a {
+    font-family: $font-secondary;
+  }
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}

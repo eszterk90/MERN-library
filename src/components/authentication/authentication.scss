@@ -1,0 +1,14 @@
+@use '../UI/_variables.sass' as *;
+
+.authentication {
+    background-image: url('../../../public/images/library.jpg');
+    background-size: cover;
+    height: 100vh; 
+    width: 100%;
+
+    h1 {
+        text-align: center;
+        padding: 2rem;
+        color: lighten($base-color, 90%);
+    }
+}
