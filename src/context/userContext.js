@@ -2,6 +2,7 @@ import React, {createContext, useState, useEffect} from 'react';
 import useLocalStorage from "use-local-storage";
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
+import baseUrl from '../config';
 
 const UserContext = createContext();
 
@@ -23,7 +24,7 @@ export const UserProvider = ({children}) => {
     const email = formData.email;
     const password = formData.password;
     const user = {email, password};
-    axios.post('http://localhost:5001/user/login', user)
+    axios.post(`${baseUrl}user/login`, user)
     .then(response => {
         if(response.data.email) {
             setCurrentUser(response.data)
