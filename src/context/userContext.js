@@ -18,6 +18,18 @@ export const UserProvider = ({children}) => {
     const inputHandler = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value});
     }
+
+
+    const createUser = (e) => {
+        e.preventDefault();
+        axios.post(`${baseUrl}user/add`, formData)
+      .then(response => {
+        console.log(response.data);
+        setMessage(response.data);
+        setSubmit(true);
+      })
+      .catch(e => console.log(e));
+      }
     
     const signIn = (e) => {
     e.preventDefault();

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import axios from 'axios';
 import Message from './message/Message';
-import baseUrl from '../../../config/baseUrl';
+import baseUrl from '../../../config';
 
 function SignUpForm () {
     const [message, setMessage] = useState(null);
