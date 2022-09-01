@@ -20,16 +20,16 @@ export const UserProvider = ({children}) => {
     }
 
 
-    const createUser = (e) => {
-        e.preventDefault();
-        axios.post(`${baseUrl}user/add`, formData)
-      .then(response => {
-        console.log(response.data);
-        setMessage(response.data);
-        setSubmit(true);
-      })
-      .catch(e => console.log(e));
-      }
+    // const createUser = (e) => {
+    //     e.preventDefault();
+    //     axios.post(`${baseUrl}user/add`, formData)
+    //   .then(response => {
+    //     console.log(response.data);
+    //     setMessage(response.data);
+    //     setSubmit(true);
+    //   })
+    //   .catch(e => console.log(e));
+    //   }
     
     const signIn = (e) => {
     e.preventDefault();
@@ -38,11 +38,11 @@ export const UserProvider = ({children}) => {
     const user = {email, password};
     axios.post(`${baseUrl}user/login`, user)
     .then(response => {
-        if(response.data.email) {
-            setCurrentUser(response.data)
+        if(response.data.jwtToken) {
+            setCurrentUser(response.data.result);
             console.log('response data', response.data);
         }
-        setMessage(response.data)
+        setMessage(response.data.message);
         setSubmit(true)
         // navigate('/home')
     })
@@ -63,7 +63,7 @@ export const UserProvider = ({children}) => {
       }
 
 
-    const value = {signIn, inputHandler, signOut, currentUser, backToHome}
+    const value = {signIn, inputHandler, signOut, currentUser, backToHome, message}
 
     return <UserContext.Provider value={value}>{children}</UserContext.Provider>
 }
