@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import axios from 'axios';
 import Message from './message/Message';
+import baseUrl from '../../../config/baseUrl';
 
 function SignUpForm () {
     const [message, setMessage] = useState(null);
@@ -19,7 +20,7 @@ function SignUpForm () {
     
       const createUser = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:5001/user/add', formData)
+        axios.post(`${baseUrl}user/add`, formData)
       .then(response => {
         console.log(response.data);
         setMessage(response.data);
