@@ -32,7 +32,7 @@ function SignUpForm () {
     return (
         <>
           <form onSubmit={createUser}>
-          <Message content={message}/>
+          <Message content={message} className='signup-message'/>
             <h3>Create Account</h3>
             <label htmlFor="name">Name</label>
             <input type="text" name="name" id="name" onChange={inputHandler} spellcheck="false"/>

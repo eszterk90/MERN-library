@@ -1,9 +1,9 @@
 import React from 'react';
 import {BiErrorCircle} from 'react-icons/bi';
 
-function Message({content}) {
+function Message({content, className}) {
   return (
-    <h3 className='message'>{ content}</h3>
+    <h3 className={`${className} message`}>{content}</h3>
   )
 }
 

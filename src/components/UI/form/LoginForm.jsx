@@ -9,7 +9,7 @@ function LoginForm() {
    return (
         <>
             <form onSubmit={signIn}>
-            <Message content={message}/>
+            <Message content={message} className="login-message"/>
                 <h3>Login here</h3>
                 <label htmlFor="email">Email</label>
                 <input type="email" name="email" id="email" onChange={inputHandler} spellcheck="false"/>
