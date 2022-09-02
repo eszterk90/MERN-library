@@ -39,6 +39,8 @@ export const UserProvider = ({children}) => {
     axios.post(`${baseUrl}user/login`, user)
     .then(response => {
         if(response.data.jwtToken) {
+            localStorage.setItem('token', response.data.jwtToken);
+            console.log(localStorage.token);
             setCurrentUser(response.data.result);
             console.log('response data', response.data);
         }
