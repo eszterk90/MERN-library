@@ -6,6 +6,7 @@ import Book from './components/book/Book'
 import Profile from './components/profile/Profile'
 import UserContext from './context/userContext';
 import NavBar from './components/navbar/NavBar';
+import Verify from './components/authentication/Verify'
 
 
 
@@ -24,6 +25,7 @@ function App() {
         )}
         <Route path='/:bookId' element={<Book />} /> 
         <Route path='/profile' element={<Profile />} />
+        <Route path='/verify?authId=authId&secretKey=secretKey' element={<Verify/>} />
         {/*<Route path='*' element={<Navigate to='/' />} />*/}
       </Routes>
       {currentUser && <NavBar/>}

@@ -8,6 +8,18 @@ const BookContext = createContext();
 
 export const BookProvider = ({children}) => {
 
+const API = axios.create({baseUrl: baseUrl});
+
+API.interceptors.request.use((req) => {
+    if(localStorage.getItem("token")) {
+        console.log("Token===>",localStorage.getItem("token"))
+        req.headers.authorization = localStorage.getItem("token");
+    }
+    return req;
+});
+
+console.log(localStorage.getItem("token"));
+
 const {currentUser} = useContext(userContext);
 const [books, setBooks] = useState([]);
 const [rentedBooks, setRentedBooks] = useState([]);
@@ -15,8 +27,9 @@ const [rentedBooks, setRentedBooks] = useState([]);
 let navigate = useNavigate();
 
 const getAllBooks = () => {
-    axios.get(`${baseUrl}books/all`)
+    API.get(`${baseUrl}books/all`)
     .then(data => {
+        console.log('data', data)
         setBooks(data.data)
     })
     .catch(err => console.error(err))
@@ -31,7 +44,7 @@ const addBookItem = (bookToAdd) => {
   console.log('filtered Item', filteredItem)
   if(filteredItem) {
       filteredItem.rented_by = currentUser._id;
-      axios.post(`${baseUrl}books/checkout`, filteredItem)
+      API.post(`${baseUrl}books/checkout`, filteredItem)
         .then(res => {
             getAllBooks()
             allYourBooks()
@@ -44,7 +57,7 @@ const addBookItem = (bookToAdd) => {
 
 const allYourBooks = () => {
     if(currentUser) {
-        axios.get(`${baseUrl}books/${currentUser._id}/shelf`)
+        API.get(`${baseUrl}books/${currentUser._id}/shelf`)
         .then(res => {
             setRentedBooks(res)
         })
@@ -62,7 +75,7 @@ const removeBookItem = (bookToRemove) => {
     const filteredItem = rentedBooks.data.find(item => item._id === bookToRemove._id);
     console.log('filteredItem', filteredItem)
     if(filteredItem) {
-        axios.post(`${baseUrl}books/checkin`, filteredItem)
+        API.post(`${baseUrl}books/checkin`, filteredItem)
             .then(res => {
                 allYourBooks()
                 getAllBooks()

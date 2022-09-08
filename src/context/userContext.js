@@ -8,6 +8,8 @@ const UserContext = createContext();
 
 export const UserProvider = ({children}) => {
 
+    const API = axios.create({baseUrl: baseUrl});
+
     const [formData, setFormData] = useState({});
     const [currentUser, setCurrentUser] = useLocalStorage('currentUser', null);
     const [submit, setSubmit] = useState(false);
@@ -36,7 +38,7 @@ export const UserProvider = ({children}) => {
     const email = formData.email;
     const password = formData.password;
     const user = {email, password};
-    axios.post(`${baseUrl}user/login`, user)
+    API.post(`${baseUrl}user/login`, user)
     .then(response => {
         if(response.data.jwtToken) {
             localStorage.setItem('token', response.data.jwtToken);
@@ -56,8 +58,11 @@ export const UserProvider = ({children}) => {
     console.log('message', message)
 
     const signOut = () => {
+      API.get(`${baseUrl}user/logout`)
+      .then(() => {
         setCurrentUser(null);
         navigate('/')
+      })
     }
 
     const backToHome = () => {
