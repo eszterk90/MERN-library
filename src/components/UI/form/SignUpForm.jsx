@@ -28,8 +28,12 @@ function SignUpForm () {
         e.preventDefault();
         axios.post(`${baseUrl}user/add`, formData)
       .then(response => {
-        console.log(response.data);
-        setMessage(response.data);
+        //console.log(response);
+        if((typeof response.data) === 'string'){
+          setMessage(response.data);
+        }else {
+          response.data.map(msg=>setMessage(msg))
+        }
         setSubmit(true);
       })
       .catch(e => console.log(e));
