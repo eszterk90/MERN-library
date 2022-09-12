@@ -32,6 +32,7 @@ function SignUpForm () {
         if((typeof response.data) === 'string'){
           setMessage(response.data);
         }else {
+          console.log(response)
           response.data.map(msg=>setMessage(msg))
         }
         setSubmit(true);
@@ -45,11 +46,11 @@ function SignUpForm () {
           <Message content={message} className='signup-message'/>
             <h3>Create Account</h3>
             <label htmlFor="name">Name</label>
-            <input type="text" name="name" id="name" required onChange={inputHandler} spellcheck="false"/>
+            <input type="text" name="name" id="name" onChange={inputHandler} spellcheck="false"/>
             <label htmlFor="email">Email</label>
-            <input type="email" name="email" id="email" required onChange={inputHandler} spellcheck="false"/>
+            <input type="email" name="email" id="email" onChange={inputHandler} spellcheck="false"/>
             <label htmlFor="password">Password</label>
-            <input type="password" name="password" id="password" required onChange={inputHandler} spellcheck="false"/>
+            <input type="password" name="password" id="password" onChange={inputHandler} spellcheck="false"/>
             <button className="btn form-btn" type="submit">sign up</button>
           </form>
           {submit && <span>{message}</span>}
