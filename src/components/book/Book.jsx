@@ -4,6 +4,7 @@ import userContext from '../../context/userContext'
 import {useParams, useNavigate} from 'react-router-dom'
 import baseUrl from '../../config'
 import axios from 'axios'
+import './book.styles.scss'
 
 
 function Book() {
@@ -26,22 +27,24 @@ useEffect(() => {
 }, [])
 
   return (
-    <div className='profile-container'>
-      <div className='books'>
+      <div className='books-section'>
         {book && <> 
-          <div className='book'>
-          {!book.rented_by ? <button className='card-btn checkin' onClick={addToProfile}>Add to cart</button> : <span>Not available</span>}
-          <button onClick={backToHome}>Go Home</button>
-          <img src={book.imageUrl}/>
+          <div className='outer-container'>
+            <div className='book-img'>
+            <img src={book.smallThumbnail}/>
+          </div>
         </div>
         <div className='book-info'>
-          {/*<h3>{book.title[0].toUpperCase()+ book.title.slice(1)}</h3>*/}
-          <h4>{book.author}</h4>
-          <p>pages: {book.pages}</p>
+          <div>
+          <h3>{book.title}</h3>
+          <p>{book.description}</p>
+        </div>
+        <div>
+          {!book.rented_by ? <button className='card-btn checkin single-book-btn' onClick={addToProfile}>Borrow this book</button> : <button className='card-btn checkin single-book-btn'>Not available</button>}
+        </div>
         </div>
         </>}
       </div>
-    </div>
   )
 }
 

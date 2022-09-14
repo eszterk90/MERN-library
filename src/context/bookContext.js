@@ -29,7 +29,7 @@ let navigate = useNavigate();
 const getAllBooks = () => {
     API.get(`${baseUrl}books/all`)
     .then(data => {
-        console.log('data', data)
+        console.log('data', data.data)
         setBooks(data.data)
     })
     .catch(err => console.error(err))

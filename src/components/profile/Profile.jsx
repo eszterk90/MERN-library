@@ -21,7 +21,7 @@ function Profile() {
       <div className='books'>
       {rentedBooks.data ? rentedBooks.data.map((book, i) => 
         <div className='book'>
-        <img src={book.imageUrl} alt="book cover"/>
+        <img src={book.smallThumbnail} alt="book cover"/>
           {book.rented_by && <button className='card-btn checkin' onClick={() => removeBookItem(book)}>Check back</button>}
         </div>) : 
         <div>
