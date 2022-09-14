@@ -40,9 +40,9 @@ export const UserProvider = ({children}) => {
     const user = {email, password};
     API.post(`${baseUrl}user/login`, user)
     .then(response => {
-        if(response.data.jwtToken) {
-            localStorage.setItem('token', response.data.jwtToken);
-            console.log(localStorage.token);
+        if(response.data.result.email) {
+            // localStorage.setItem('token', response.data.jwtToken);
+            // console.log(localStorage.token);
             setCurrentUser(response.data.result);
             console.log('response data', response.data);
         }

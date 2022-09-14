@@ -9,8 +9,6 @@ function Home() {
     const {searchResult, books, addBookItem} = useContext(bookContext)
     const {currentUser} = useContext(userContext);
 
-    
-
     return(
         <>
         <Header/>
@@ -22,11 +20,11 @@ function Home() {
                     {books.map((book, i) => 
                         <div className='book-container' key={book.id}>
                             
-                                <img src={book.imageUrl} alt="book cover"/>
+                                <img src={book.smallThumbnail} alt="book cover"/>
                         
-                            <div className='title'>
+                            {/*<div className='title'>
                                 <h3>{book.title[0].toUpperCase()+ book.title.slice(1)}</h3>
-                            </div>
+                    </div>*/}
                             
                             <div>
                                 <Link to={`/${book._id}`}><button className="btn card-btn" onClick={() => {}}>See this book</button></Link>
