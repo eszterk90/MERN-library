@@ -18,11 +18,12 @@ API.interceptors.request.use((req) => {
     return req;
 });
 
-console.log(localStorage.getItem("token"));
+// console.log(localStorage.getItem("token"));
 
 const {currentUser} = useContext(userContext);
 const [books, setBooks] = useState([]);
 const [rentedBooks, setRentedBooks] = useState([]);
+const [currentBook, setCurrentBook] = useState(null);
 
 let navigate = useNavigate();
 
@@ -90,7 +91,7 @@ const findBooks = (e) => {
     console.log(params);
     if(!params) {
         setBooks(books);
-        getAllBooks()
+        getAllBooks();
     }
     else {
         const newSearchResult = books.filter(book => book.title.toLowerCase().includes(params))
@@ -99,8 +100,7 @@ const findBooks = (e) => {
     }
 }
 
-
-const value = {books, addBookItem, rentedBooks, removeBookItem, allYourBooks, findBooks}
+const value = {books, addBookItem, rentedBooks, removeBookItem, allYourBooks, currentBook, currentBook}
 
 return <BookContext.Provider value={value}>{children}</BookContext.Provider>
 

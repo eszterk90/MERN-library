@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import {Route, Routes} from 'react-router-dom';
 import Home from './components/main/Home';
 import Authentication from './components/authentication/Authentication';
-import Book from './components/book/Book'
+import Modal from './components/book/Book'
 import Profile from './components/profile/Profile'
 import UserContext from './context/userContext';
 import NavBar from './components/navbar/NavBar';
@@ -23,7 +23,6 @@ function App() {
         : (
         <Route path='/' element={<Authentication />} />
         )}
-        <Route path='/:bookId' element={<Book />} /> 
         <Route path='/profile' element={<Profile />} />
         <Route path='/verify?authId=authId&secretKey=secretKey' element={<Verify/>} />
         {/*<Route path='*' element={<Navigate to='/' />} />*/}
