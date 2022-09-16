@@ -19,6 +19,8 @@ const addToProfile = () => {
   addBookItem(book)
 }
 
+console.log('book', book);
+
 useEffect(() => {
   (()=> {
     axios.get(baseUrl + 'books/' + bookId)
