@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, {createContext, useContext, useEffect, useState} from 'react';
 import userContext from './userContext'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import baseUrl from '../config';
 
 const BookContext = createContext();
@@ -80,27 +80,44 @@ const removeBookItem = (bookToRemove) => {
             .then(res => {
                 allYourBooks()
                 getAllBooks()
-            })
+        })
         
     }
     
 }
-const findBooks = (e) => {
-    e.preventDefault();
-    let params = e.target.value;
-    console.log(params);
-    if(!params) {
-        setBooks(books);
-        getAllBooks();
-    }
-    else {
-        const newSearchResult = books.filter(book => book.title.toLowerCase().includes(params))
-        setBooks(newSearchResult);
+// const findBooks = (e) => {
+//     e.preventDefault();
+//     let params = e.target.value;
+//     console.log(params);
+//     if(!params) {
+//         setBooks(books);
+//         getAllBooks();
+//     }
+//     else {
+        
+//         setBooks();
+        
+//     }
+// }
+
+
+const findBook = (book) => {
+    const bookId = book._id
+    API.get(`${baseUrl}books/${bookId}`)
+    .then(data => {
+        console.log('data', data.data)
+        setCurrentBook(data.data)
         navigate('/')
-    }
+    })
+    .catch(err => console.error(err))
 }
 
-const value = {books, addBookItem, rentedBooks, removeBookItem, allYourBooks, currentBook, currentBook}
+useEffect(() => {
+    console.log("current book")
+}, [currentBook])
+
+
+const value = {books, addBookItem, rentedBooks, removeBookItem, allYourBooks, currentBook, findBook}
 
 return <BookContext.Provider value={value}>{children}</BookContext.Provider>
 

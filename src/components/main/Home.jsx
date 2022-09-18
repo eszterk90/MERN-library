@@ -8,7 +8,7 @@ import Modal from "../book/Modal";
 
 function Home() {
 
-    const {books, addBookItem, currentBook, setCurrentBook} = useContext(bookContext)
+    const {books, addBookItem, currentBook, findBook} = useContext(bookContext)
     const {currentUser} = useContext(userContext);
     
   
@@ -39,7 +39,7 @@ function Home() {
                             </div>
                             
                             <div>
-                                <Link to={`/`} onClick={() => {setCurrentBook(book)}}><button className="btn card-btn">See this book</button></Link>
+                                <Link to={`/`} onClick={() => {findBook(book)}}><button className="btn card-btn">See this book</button></Link>
                                 {!book.rented_by ? 
                                     <button className="btn card-btn" onClick={() => addBookItem(book)}>Borrow this book</button> : 
                                     <span className="card-span">Not available</span>
