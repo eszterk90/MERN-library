@@ -10,15 +10,15 @@ export const BookProvider = ({children}) => {
 
 const API = axios.create({baseUrl: baseUrl});
 
-API.interceptors.request.use((req) => {
-    if(localStorage.getItem("token")) {
-        console.log("Token===>",localStorage.getItem("token"))
-        req.headers.authorization = localStorage.getItem("token");
-    }
-    return req;
-});
+// API.interceptors.request.use((req) => {
+//     if(localStorage.getItem("token")) {
+//         console.log("Token===>",localStorage.getItem("token"))
+//         req.headers.authorization = localStorage.getItem("token");
+//     }
+//     return req;
+// });
 
-console.log(localStorage.getItem("token"));
+
 
 const {currentUser} = useContext(userContext);
 const [books, setBooks] = useState([]);
@@ -29,15 +29,25 @@ let navigate = useNavigate();
 const getAllBooks = () => {
     API.get(`${baseUrl}books/all`)
     .then(data => {
-        console.log('data', data.data)
+        console.log('data 32', data)
+        // if(data.error) {
+        //     navigate('/')
+        // }
+        // else {
+        //     setBooks(data.data)
+        // }
         setBooks(data.data)
     })
     .catch(err => console.error(err))
 }
-useEffect(() => {
-    getAllBooks()
-}, [currentUser])
 
+useEffect(() => {
+    if(currentUser) {
+        getAllBooks()
+        console.log('.....')
+    }
+    
+}, [currentUser])
 
 
 

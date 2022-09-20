@@ -17,7 +17,7 @@ function Home() {
                 {/* <h1>All books</h1> */}
                 {/* <Search/> */}
                 <div className='books-container'>
-                    {books.map((book, i) => 
+                    {books?.map((book, i) => 
                         <div className='book-container' key={book.id}>
                             
                                 <img src={book.smallThumbnail} alt="book cover"/>
