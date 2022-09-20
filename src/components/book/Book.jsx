@@ -11,38 +11,38 @@ function Book() {
 
 const {bookId} = useParams()
 
-const {books, addBookItem} = useContext(bookContext);
+const {books, addBookItem, currentBook} = useContext(bookContext);
 const {backToHome} = useContext(userContext);
-const [book, setBook] = useState({})
+// const [book, setBook] = useState({})
 
 const addToProfile = () => {
-  addBookItem(book)
+  addBookItem(currentBook)
 }
 
-console.log('book', book);
+console.log('book', currentBook);
 
-useEffect(() => {
-  (()=> {
-    axios.get(baseUrl + 'books/' + bookId)
-      .then(response => setBook(response.data))
-  }) ()
-}, [])
+// useEffect(() => {
+//   (()=> {
+//     axios.get(baseUrl + 'books/' + bookId)
+//       .then(response => setBook(response.data))
+//   }) ()
+// }, [])
 
   return (
       <div className='books-section'>
-        {book && <> 
+        {currentBook && <> 
           <div className='outer-container'>
             <div className='book-img'>
-            <img src={book.smallThumbnail}/>
+            <img src={currentBook.smallThumbnail}/>
           </div>
         </div>
         <div className='book-info'>
-          <div>
-          <h3>{book.title}</h3>
-          <p>{book.description}</p>
-        </div>
+          <h3>{currentBook.title}</h3>
+          <div className='book-description'>
+            <p>{currentBook.description}</p>
+           </div>
         <div>
-          {!book.rented_by ? <button className='card-btn checkin single-book-btn' onClick={addToProfile}>Borrow this book</button> : <button className='card-btn checkin single-book-btn'>Not available</button>}
+          {!currentBook.rented_by ? <button className='card-btn checkin single-book-btn' onClick={addToProfile}>Borrow this book</button> : <button className='card-btn checkin single-book-btn'>Not available</button>}
         </div>
         </div>
         </>}

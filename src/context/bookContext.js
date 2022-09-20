@@ -23,6 +23,7 @@ const API = axios.create({baseUrl: baseUrl});
 const {currentUser} = useContext(userContext);
 const [books, setBooks] = useState([]);
 const [rentedBooks, setRentedBooks] = useState([]);
+const [currentBook, setCurrentBook] = useState(null);
 
 let navigate = useNavigate();
 
@@ -30,12 +31,6 @@ const getAllBooks = () => {
     API.get(`${baseUrl}books/all`)
     .then(data => {
         console.log('data 32', data)
-        // if(data.error) {
-        //     navigate('/')
-        // }
-        // else {
-        //     setBooks(data.data)
-        // }
         setBooks(data.data)
     })
     .catch(err => console.error(err))
@@ -49,7 +44,7 @@ useEffect(() => {
     
 }, [currentUser])
 
-
+console.log('test')
 
 const addBookItem = (bookToAdd) => {
   const filteredItem = books.find(item => item._id === bookToAdd._id);
@@ -111,8 +106,19 @@ const findBooks = (e) => {
     }
 }
 
+const findBook = (book) => {
+    const bookId = book._id;
+    API.get(`${baseUrl}books/${bookId}`)
+        .then(response => {
+            console.log(response.data);
+            setCurrentBook(response.data);
+            navigate('/')
+        })
+        .catch(err => console.log(err))
+}
 
-const value = {books, addBookItem, rentedBooks, removeBookItem, allYourBooks, findBooks}
+
+const value = {books, addBookItem, rentedBooks, removeBookItem, allYourBooks, findBooks, findBook, currentBook, setCurrentBook}
 
 return <BookContext.Provider value={value}>{children}</BookContext.Provider>
 
