@@ -29,7 +29,7 @@ export const UserProvider = ({children}) => {
     const user = {email, password};
     API.post(`${baseUrl}user/login`, user,
     {header: {
-      'Access-Control-Allow-Origin': 'https://mock-library.herokuapp.com/'
+      'Access-Control-Allow-Origin': '*'
     }}
     )
     .then(response => {
