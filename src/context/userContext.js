@@ -1,4 +1,4 @@
-import React, {createContext, useState, useEffect} from 'react';
+import React, {createContext, useState, useEffect, useContext} from 'react';
 import useLocalStorage from "use-local-storage";
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
@@ -6,8 +6,9 @@ import baseUrl from '../config';
 
 const UserContext = createContext();
 
-export const UserProvider = ({children}) => {
 
+export const UserProvider = ({children}) => {
+  
     const API = axios.create({baseUrl: baseUrl});
 
     const [formData, setFormData] = useState({});
@@ -20,18 +21,6 @@ export const UserProvider = ({children}) => {
     const inputHandler = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value});
     }
-
-
-    // const createUser = (e) => {
-    //     e.preventDefault();
-    //     axios.post(`${baseUrl}user/add`, formData)
-    //   .then(response => {
-    //     console.log(response.data);
-    //     setMessage(response.data);
-    //     setSubmit(true);
-    //   })
-    //   .catch(e => console.log(e));
-    //   }
     
     const signIn = (e) => {
     e.preventDefault();
@@ -41,14 +30,11 @@ export const UserProvider = ({children}) => {
     API.post(`${baseUrl}user/login`, user)
     .then(response => {
         if(response.data.result.email) {
-            // localStorage.setItem('token', response.data.jwtToken);
-            // console.log(localStorage.token);
             setCurrentUser(response.data.result);
             console.log('response data', response.data);
         }
         setMessage(response.data.message);
         setSubmit(true)
-        // navigate('/home')
     })
     .catch(e => console.log(e));
     }
