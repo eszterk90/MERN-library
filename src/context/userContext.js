@@ -27,10 +27,10 @@ export const UserProvider = ({children}) => {
     const email = formData.email;
     const password = formData.password;
     const user = {email, password};
-    API.post(`${baseUrl}user/login`, user,
-    {header: {
-      'Access-Control-Allow-Origin': '*'
-    }}
+    API.post(`${baseUrl}user/login`, user
+    // {header: {
+    //   'Access-Control-Allow-Origin': '*'
+    // }}
     )
     .then(response => {
         if(response.data.result.email) {
