@@ -29,7 +29,8 @@ export const UserProvider = ({children}) => {
     const user = {email, password};
     API.post(`${baseUrl}user/login`, user)
     .then(response => {
-        if(response.data.result.email) {
+        console.log('response data', response.data)
+        if(response.data.result) {
             setCurrentUser(response.data.result);
             console.log('response data', response.data);
         }
