@@ -27,11 +27,7 @@ export const UserProvider = ({children}) => {
     const email = formData.email;
     const password = formData.password;
     const user = {email, password};
-    API.post(`${baseUrl}user/login`, user,
-    {header: {
-      'Access-Control-Allow-Origin': 'https://mock-library.herokuapp.com/'
-    }}
-    )
+    API.post(`${baseUrl}user/login`, user)
     .then(response => {
         if(response.data.result.email) {
             setCurrentUser(response.data.result);
