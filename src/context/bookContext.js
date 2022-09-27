@@ -51,7 +51,7 @@ const addBookItem = (bookToAdd) => {
   console.log('filtered Item', filteredItem)
   if(filteredItem) {
       filteredItem.rented_by = currentUser._id;
-      API.post(`${baseUrl}books/checkout`, filteredItem, {withCredentials: true})
+      API.post(`${baseUrl}books/checkout`, filteredItem, {withCredentials: true, 'Access-Control-Allow-Origin': baseUrl})
         .then(res => {
             getAllBooks()
             allYourBooks()
@@ -64,7 +64,7 @@ const addBookItem = (bookToAdd) => {
 
 const allYourBooks = () => {
     if(currentUser) {
-        API.get(`${baseUrl}books/${currentUser._id}/shelf`, {withCredentials: true})
+        API.get(`${baseUrl}books/${currentUser._id}/shelf`, {withCredentials: true, 'Access-Control-Allow-Origin': baseUrl})
         .then(res => {
             setRentedBooks(res)
         })
@@ -82,7 +82,7 @@ const removeBookItem = (bookToRemove) => {
     const filteredItem = rentedBooks.data.find(item => item._id === bookToRemove._id);
     console.log('filteredItem', filteredItem)
     if(filteredItem) {
-        API.post(`${baseUrl}books/checkin`, filteredItem, {withCredentials: true})
+        API.post(`${baseUrl}books/checkin`, filteredItem, {withCredentials: true, 'Access-Control-Allow-Origin': baseUrl})
             .then(res => {
                 allYourBooks()
                 getAllBooks()
@@ -108,7 +108,7 @@ const findBooks = (e) => {
 
 const findBook = (book) => {
     const bookId = book._id;
-    API.get(`${baseUrl}books/${bookId}`, {withCredentials: true})
+    API.get(`${baseUrl}books/${bookId}`, {withCredentials: true, 'Access-Control-Allow-Origin': baseUrl})
         .then(response => {
             console.log(response.data);
             setCurrentBook(response.data);
