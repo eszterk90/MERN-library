@@ -28,7 +28,7 @@ const [currentBook, setCurrentBook] = useState(null);
 let navigate = useNavigate();
 
 const getAllBooks = () => {
-    API.get(`${baseUrl}books/all`, {withCredentials: false})
+    API.get(`${baseUrl}books/all`, {withCredentials: true})
     .then(data => {
         console.log('data 32', data)
         setBooks(data.data)
@@ -51,7 +51,7 @@ const addBookItem = (bookToAdd) => {
   console.log('filtered Item', filteredItem)
   if(filteredItem) {
       filteredItem.rented_by = currentUser._id;
-      API.post(`${baseUrl}books/checkout`, filteredItem, {withCredentials: false})
+      API.post(`${baseUrl}books/checkout`, filteredItem, {withCredentials: true})
         .then(res => {
             getAllBooks()
             allYourBooks()
@@ -64,7 +64,7 @@ const addBookItem = (bookToAdd) => {
 
 const allYourBooks = () => {
     if(currentUser) {
-        API.get(`${baseUrl}books/${currentUser._id}/shelf`, {withCredentials: false})
+        API.get(`${baseUrl}books/${currentUser._id}/shelf`, {withCredentials: true})
         .then(res => {
             setRentedBooks(res)
         })
@@ -82,7 +82,7 @@ const removeBookItem = (bookToRemove) => {
     const filteredItem = rentedBooks.data.find(item => item._id === bookToRemove._id);
     console.log('filteredItem', filteredItem)
     if(filteredItem) {
-        API.post(`${baseUrl}books/checkin`, filteredItem, {withCredentials: false})
+        API.post(`${baseUrl}books/checkin`, filteredItem, {withCredentials: true})
             .then(res => {
                 allYourBooks()
                 getAllBooks()
@@ -108,7 +108,7 @@ const findBooks = (e) => {
 
 const findBook = (book) => {
     const bookId = book._id;
-    API.get(`${baseUrl}books/${bookId}`, {withCredentials: false})
+    API.get(`${baseUrl}books/${bookId}`, {withCredentials: true})
         .then(response => {
             console.log(response.data);
             setCurrentBook(response.data);
