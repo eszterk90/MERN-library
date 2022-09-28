@@ -1,4 +1,4 @@
-const baseUrl = 'https://library-backend.vercel.app/'
+const baseUrl = 'https://library-backend-oovrpsq6n-eszterk90.vercel.app/'
 
 // const baseUrl = 'https://mock-library.herokuapp.com/'
 
