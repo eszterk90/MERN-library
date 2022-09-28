@@ -27,7 +27,7 @@ export const UserProvider = ({children}) => {
     const email = formData.email;
     const password = formData.password;
     const user = {email, password};
-    API.post(`${baseUrl}user/login`, user, {withCredentials: true, 'Access-Control-Allow-Origin': baseUrl})
+    API.post(`${baseUrl}user/login`, user, {withCredentials: true})
     .then(response => {
         console.log('response data', response.data)
         if(response.data.result) {
@@ -45,7 +45,7 @@ export const UserProvider = ({children}) => {
     console.log('message', message)
 
     const signOut = () => {
-      API.get(`${baseUrl}user/logout`, {withCredentials: true, 'Access-Control-Allow-Origin': baseUrl})
+      API.get(`${baseUrl}user/logout`, {withCredentials: true})
       .then(() => {
         setCurrentUser(null);
         navigate('/')
