@@ -11,8 +11,26 @@ export const UserProvider = ({children}) => {
   
     const API = axios.create({baseUrl: baseUrl});
 
+    API.interceptors.request.use(
+      req => {
+        req.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
+        return req;
+      },
+      error => {
+        return Promise.reject(error);
+      }
+    )
+
+    // const API = axios.create({
+    //   baseUrl: baseUrl,
+    //   headers: {
+    //     Authorization: `Bearer ${localStorage.getItem('token')}` 
+    //   }
+    // })
+
     const [formData, setFormData] = useState({});
     const [currentUser, setCurrentUser] = useLocalStorage('currentUser', null);
+    const [userName, setUserName] = useLocalStorage('userName', null);
     const [submit, setSubmit] = useState(false);
     const [message, setMessage] = useState(null)
 
@@ -30,8 +48,12 @@ export const UserProvider = ({children}) => {
     API.post(`${baseUrl}user/login`, user)
     .then(response => {
         console.log('response data', response.data)
-        if(response.data.result) {
-            setCurrentUser(response.data.result);
+        if(response.data.accessToken) {
+          console.log(response.data.accessToken)
+            localStorage.setItem('token', response.data.accessToken);
+            console.log(localStorage.getItem('token'))
+            setCurrentUser(response.data.accessToken);
+            setUserName(response.data.result);
             console.log('response data', response.data);
         }
         setMessage(response.data.message);
@@ -50,6 +72,7 @@ export const UserProvider = ({children}) => {
         setCurrentUser(null);
         navigate('/')
       })
+      localStorage.clear()
     }
 
     const backToHome = () => {
@@ -57,7 +80,7 @@ export const UserProvider = ({children}) => {
       }
 
 
-    const value = {signIn, inputHandler, signOut, currentUser, backToHome, message}
+    const value = {signIn, inputHandler, signOut, currentUser, backToHome, message, userName}
 
     return <UserContext.Provider value={value}>{children}</UserContext.Provider>
 }
