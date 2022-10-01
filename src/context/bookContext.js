@@ -8,16 +8,18 @@ const BookContext = createContext();
 
 export const BookProvider = ({children}) => {
 
+ 
 const API = axios.create({baseUrl: baseUrl});
 
-// API.interceptors.request.use((req) => {
-//     if(localStorage.getItem("token")) {
-//         console.log("Token===>",localStorage.getItem("token"))
-//         req.headers.authorization = localStorage.getItem("token");
-//     }
-//     return req;
-// });
-
+    API.interceptors.request.use(
+      req => {
+        req.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
+        return req;
+      },
+      error => {
+        return Promise.reject(error);
+      }
+    )
 
 
 const {currentUser} = useContext(userContext);
@@ -50,7 +52,7 @@ const addBookItem = (bookToAdd) => {
   const filteredItem = books.find(item => item._id === bookToAdd._id);
   console.log('filtered Item', filteredItem)
   if(filteredItem) {
-      filteredItem.rented_by = currentUser._id;
+    //   filteredItem.rented_by = currentUser._id;
       API.post(`${baseUrl}books/checkout`, filteredItem)
         .then(res => {
             getAllBooks()
@@ -64,7 +66,7 @@ const addBookItem = (bookToAdd) => {
 
 const allYourBooks = () => {
     if(currentUser) {
-        API.get(`${baseUrl}books/${currentUser._id}/shelf`)
+        API.get(`${baseUrl}books/${currentUser}/shelf`)
         .then(res => {
             setRentedBooks(res)
         })

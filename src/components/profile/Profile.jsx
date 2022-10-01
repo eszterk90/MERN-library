@@ -6,7 +6,7 @@ import './profile.styles.scss'
 function Profile() {
 
   const {rentedBooks, removeBookItem} = useContext(bookContext)
-  const {currentUser, backToHome} = useContext(userContext)
+  const {userName, backToHome} = useContext(userContext)
 
 //   <div className='title'>
 //   <h3>{book.title[0].toUpperCase()+ book.title.slice(1)}</h3>
@@ -16,7 +16,7 @@ function Profile() {
 
   return (
     <div className='profile-container'>
-        <h1>Hi {currentUser.name}!</h1>
+        <h1>Hi {userName}!</h1>
         <p>Your bookshelf</p>
       <div className='books'>
       {rentedBooks.data ? rentedBooks.data.map((book, i) => 
